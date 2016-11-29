@@ -1,0 +1,13 @@
+sudo: false
+language: scala
+script:
+  - sbt ++$TRAVIS_SCALA_VERSION scala-unboxed-optionJVM/test
+  - sbt ++$TRAVIS_SCALA_VERSION scala-unboxed-optionJS/test
+  - sbt ++$TRAVIS_SCALA_VERSION 'set scalaJSStage in Global := FullOptStage' scala-unboxed-optionJS/test
+  - sbt ++$TRAVIS_SCALA_VERSION scala-unboxed-optionJVM/doc scala-unboxed-optionJS/doc
+scala:
+  - 2.10.6
+  - 2.11.8
+  - 2.12.0
+jdk:
+  - oraclejdk8
