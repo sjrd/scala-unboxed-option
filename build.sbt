@@ -1,4 +1,4 @@
-crossScalaVersions in ThisBuild := Seq("2.11.8", "2.10.6", "2.12.0")
+crossScalaVersions in ThisBuild := Seq("2.11.8", "2.12.0")
 scalaVersion in ThisBuild := crossScalaVersions.value.head
 
 lazy val `scala-unboxed-option` = crossProject.crossType(CrossType.Pure).
