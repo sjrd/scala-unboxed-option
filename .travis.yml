@@ -6,7 +6,16 @@ script:
   - sbt ++$TRAVIS_SCALA_VERSION 'set scalaJSStage in Global := FullOptStage' scala-unboxed-optionJS/test
   - sbt ++$TRAVIS_SCALA_VERSION scala-unboxed-optionJVM/doc scala-unboxed-optionJS/doc
 scala:
-  - 2.11.8
-  - 2.12.0
+  - 2.11.12
+  - 2.12.8
 jdk:
-  - oraclejdk8
+  - openjdk8
+
+cache:
+  directories:
+    - "$HOME/.ivy2/cache"
+    - "$HOME/.sbt"
+before_cache:
+  # Cleanup the cached directories to avoid unnecessary cache updates
+  - find $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
+  - find $HOME/.sbt -name "*.lock" -print -delete
