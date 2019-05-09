@@ -21,6 +21,3 @@ lazy val `scala-unboxed-option` = crossProject(JSPlatform, JVMPlatform).
     libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.1" % "test",
     scalacOptions in Test -= "-Xfatal-warnings"
   )
-
-lazy val `scala-unboxed-optionJVM` = `scala-unboxed-option`.jvm
-lazy val `scala-unboxed-optionJS` = `scala-unboxed-option`.js
