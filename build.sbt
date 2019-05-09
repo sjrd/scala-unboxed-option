@@ -1,7 +1,7 @@
 // shadow sbt-scalajs' crossProject and CrossType from Scala.js 0.6.x
 import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
-crossScalaVersions in ThisBuild := Seq("2.11.8", "2.12.0")
+crossScalaVersions in ThisBuild := Seq("2.11.12", "2.12.8")
 scalaVersion in ThisBuild := crossScalaVersions.value.head
 
 lazy val `scala-unboxed-option` = crossProject(JSPlatform, JVMPlatform).
