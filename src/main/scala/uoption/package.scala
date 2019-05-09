@@ -1,11 +1,11 @@
 import scala.language.higherKinds
 
 package object uoption {
-  private[uoption] final class WrappedNone(
+  private[uoption] sealed class WrappedNone(
       depth: Int,
-      val unwrap: Any // UNone or WrappedNone
+      private[uoption] val unwrap: WrappedNone // null when this is UNone
   ) {
-    lazy val wrap: WrappedNone =
+    private[uoption] lazy val wrap: WrappedNone =
       new WrappedNone(depth + 1, this)
 
     private val stringRepr: String =
@@ -14,9 +14,7 @@ package object uoption {
     override def toString(): String = stringRepr
   }
 
-  object UNone {
-    private[uoption] val wrap: WrappedNone = new WrappedNone(1, this)
-
+  object UNone extends WrappedNone(0, null) {
     override def toString(): String = "UNone"
   }
 
@@ -34,7 +32,6 @@ package object uoption {
   object USome {
     @inline // only for Scala.js?
     def apply[A](value: A): USome[A] = value match {
-      case value @ UNone      => value.wrap.asInstanceOf[USome[A]]
       case value: WrappedNone => value.wrap.asInstanceOf[USome[A]]
       case _                  => value.asInstanceOf[USome[A]]
     }
